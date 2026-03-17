@@ -30,7 +30,7 @@ jobs:
             STATUS=$(echo "$RESPONSE" | jq -r '.status // empty')
             echo "Attempt $i/40: status = $STATUS"
 
-            if [ "$STATUS" = "running" ]; then
+            if echo "$STATUS" | grep -q "^running"; then
               echo "result=success" >> $GITHUB_OUTPUT
               echo "desc=Deployed successfully" >> $GITHUB_OUTPUT
               exit 0
