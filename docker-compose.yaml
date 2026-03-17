@@ -20,8 +20,8 @@ services:
       - ADMIN_PASSWD=${ADMIN_PASSWORD}
     volumes:
       - prestashop_data:/var/www/html
-    ports:
-      - "8080:80"
+    expose:
+      - "80"
 
   db:
     image: mysql:8.0
