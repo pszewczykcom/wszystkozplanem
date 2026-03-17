@@ -1,0 +1,40 @@
+services:
+  prestashop:
+    image: prestashop/prestashop:9-apache
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - DB_SERVER=db
+      - DB_NAME=prestashop
+      - DB_USER=prestashop
+      - DB_PASSWD=${DB_PASSWORD}
+      - PS_DOMAIN=wszystkozplanem.szewczyk.app
+      - PS_INSTALL_AUTO=1
+      - PS_ENABLE_SSL=1
+      - PS_FOLDER_ADMIN=admin4577
+      - PS_FOLDER_INSTALL=install4577
+      - PS_COUNTRY=PL
+      - PS_LANGUAGE=pl
+      - ADMIN_MAIL=${ADMIN_EMAIL}
+      - ADMIN_PASSWD=${ADMIN_PASSWORD}
+    volumes:
+      - prestashop_data:/var/www/html
+    ports:
+      - "8080:80"
+
+  db:
+    image: mysql:8.0
+    restart: always
+    command: --default-authentication-plugin=caching_sha2_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=prestashop
+      - MYSQL_USER=prestashop
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  prestashop_data:
+  db_data:
