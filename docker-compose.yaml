@@ -1,6 +1,6 @@
 services:
   prestashop:
-    image: prestashop/prestashop:9-apache
+    image: prestashop/prestashop:9.0.3-8.4
     restart: always
     depends_on:
       - db
