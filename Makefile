@@ -1,6 +1,5 @@
 COMPOSE := docker compose
-# Merge local override (e.g. host port 8080) with base compose
-COMPOSE_FILES := -f docker-compose.yaml -f docker-compose.local.yaml
+COMPOSE_FILES := -f docker-compose.yaml
 
 .PHONY: up down bash
 
